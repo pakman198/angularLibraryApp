@@ -1,5 +1,5 @@
 (function(){
-'use stric';
+'use strict';
 
 angular.module('LibraryApp', ['ui.bootstrap'])
 .controller('LibraryController', LibraryController)
