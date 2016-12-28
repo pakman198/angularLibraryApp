@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="LibraryApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Pako's Library</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="angular.min.js"></script>
+	<script src="ui-bootstrap-tpls-2.3.1.min.js"></script>
+	<script src="libraryApp.js"></script>
+	<style>
+		.fade.in{
+			display: block;
+		}
+		.modal-backdrop.fade{
+			display: none;
+		}
+		.modal-backdrop.fade.in{
+			display: block;
+		}
+	</style>
+</head>
+<body ng-controller="LibraryController as library">
+	<div class="container">
+		<h1>Pako's Library</h1>
+		
+
+		<div class="filters">
+			Filter by: 
+			<select name="category" id="category" ng-model="library.category" ng-change="library.filterItems()">
+				<option value="" selected="selected"> - Category - </option>
+				<option value="Fantasy">Fantasy</option>
+				<option value="Fiction">Fiction</option>
+				<option value="Finance">Finance</option>
+				<option value="Erotic"> Erotic</option>
+				<option value="Romantic Drama">Romantic Drama</option>
+				<option value="Programming">Programming</option>
+				<option value="Entrepreneurship">Entrepreneurship</option>
+				<option value="Horror">Horror</option>
+				<option value="Philosophy">Philosophy</option>
+			</select>
+		</div>
+
+		<br>
+
+		<uib-accordion>
+			<div uib-accordion-group class="panel-default" heading="Add Book" is-open="library.addBookOpen">
+				<form name="bookForm" class="form-horizontal" ng-submit="library.addBook(bookForm)">
+					<div class="form-group">
+						<label for="" class="control-label col-sm-3">Name: </label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" ng-model="library.new_book.name">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="" class="control-label col-sm-3">Author: </label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" ng-model="library.new_book.author">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="" class="control-label col-sm-3">Category: </label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" ng-model="library.new_book.category">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="" class="control-label col-sm-3">Published Date: </label>
+						<div class="col-sm-7">
+							<input type="date" class="form-control" ng-model="library.new_book.publishedDate">
+						</div>
+					</div>
+					<div class="text-center">
+						<button class="btn btn-primary" ng-click="submit();" is-open="false">Save Book</button>
+					</div>
+				</form>
+			</div>
+		</uib-accordion>
+
+		<div ng-show="library.editBookOpen">
+			<h2>Edit Book</h2>
+			<form name="editBookForm" class="form-horizontal" ng-submit="library.updateBook(editBookForm)">
+				<div class="form-group">
+					<label for="" class="control-label col-sm-3">Name: </label>
+					<div class="col-sm-7">
+						<input type="text" class="form-control" ng-model="library.edit_book.name">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="control-label col-sm-3">Author: </label>
+					<div class="col-sm-7">
+						<input type="text" class="form-control" ng-model="library.edit_book.author">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="control-label col-sm-3">Category: </label>
+					<div class="col-sm-7">
+						<input type="text" class="form-control" ng-model="library.edit_book.category">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="control-label col-sm-3">Published Date: </label>
+					<div class="col-sm-7">
+						<input type="date" class="form-control" ng-model="library.edit_book.publishedDate">
+					</div>
+				</div>
+				<input type="hidden" ng-model="library.edit_book.position">
+				<div class="text-center">
+					<button class="btn btn-primary" ng-click="submit();" is-open="false">Update Book</button>
+					<button class="btn btn-danger" ng-click="cancel();" is-open="false">Cancel</button>
+				</div>
+			</form>
+		</div>
+
+		<br>
+		
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Author</th>
+					<th>Category</th>
+					<th>Published Date</th>
+					<th>Available</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tr ng-repeat="book in books = library.books | filter:library.category | limitTo:library.pagination.itemsPerPage:library.pagination.itemsPerPage*(library.pagination.currentPage-1)">
+				<td>{{book.name}}</td>
+				<td>{{book.author}}</td>
+				<td>{{book.category}}</td>
+				<td>{{book.publishedDate | date:'dd/MM/yyyy'}}</td>
+				<td>
+					<a href="#" ng-click="library.showModal(book, library.books.indexOf(book));">
+						<span class="glyphicon glyphicon-ok" ng-if="book.user"></span>
+					</a>
+					<a href="#" ng-click="library.showModal(book, library.books.indexOf(book));">
+						<span class="glyphicon glyphicon-remove" ng-if="!book.user"></span>
+					</a>
+				</td>
+				<td>
+					<button class="btn btn-primary btn-sm" ng-click="library.editBook(book, library.books.indexOf(book))">
+						<span class="glyphicon glyphicon-pencil"></span>
+						Edit
+					</button>
+					<button class="btn btn-danger btn-sm" ng-click="library.deleteBook(book, library.books.indexOf(book))">
+						<span class="glyphicon glyphicon-remove"></span>
+						Delete
+					</button>
+				</td>
+			</tr>
+		</table>
+		
+		<ul uib-pagination total-items="library.totalItems" items-per-page="library.pagination.itemsPerPage" ng-model="library.pagination.currentPage" ng-change="library.pageChanged()"></ul>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" ng-class="library.modalOpen">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" ng-click="library.closeModal();"><span>&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Book: {{library.available_book.name}}</h4>
+				</div>
+				<div class="modal-body">
+					<div class="control-form">
+						<label for="" class="control-label">User: </label>
+						<input type="text" class="form-control" ng-model="library.available_book.user">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" ng-click="library.updateAvailability(library.available_book.index);">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-backdrop fade" ng-class="library.modalOpen"></div>
+</body>
+</html>

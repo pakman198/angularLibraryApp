@@ -1,0 +1,107 @@
+[
+  {
+    "name" : "The Lord of the Rings: The Fellowship of the Ring",
+    "author" : "Tolkein, J.R.R.",
+    "category" : "Fantasy",
+    "publishedDate" : "10/12/1930",
+    "user" : "Harry Potter"
+  },
+  {
+    "name" : "The Lord of the Rings: The Two Towers",
+    "author" : "Tolkein, J.R.R.",
+    "category" : "Fantasy",
+    "publishedDate" : "01/05/1932",
+    "user" : ""
+  },
+  {
+    "name" : "The Lord of the Rings: The Return of the King",
+    "author" : "Tolkein, J.R.R.",
+    "category" : "Fantasy",
+    "publishedDate" : "18/1/1934",
+    "user" : "Pako Herrera"
+  },
+  {
+    "name" : "Lolita",
+    "author" : "Nabokov, Vladimir",
+    "category" : "Fiction",
+    "publishedDate" : "05/12/1980",
+    "user" : ""
+  },
+  {
+    "name" : "El Principito",
+    "author" : "de Saint-Euxpéry, Antoine",
+    "category" : "Fiction",
+    "publishedDate" : "05/12/1980",
+    "user" : ""
+  },
+  {
+    "name" : "Padre Rico, Padre Pobre",
+    "author" : "Kiyosaki, Robert T.",
+    "category" : "Finance",
+    "publishedDate" : "05/08/1990",
+    "user" : ""
+  },
+  {
+    "name" : "Julieta",
+    "author" : "de Sade, Marqués",
+    "category" : "Erotic",
+    "publishedDate" : "08/06/1610",
+    "user" : ""
+  },
+  {
+    "name" : "Justina",
+    "author" : "de Sade, Marqués",
+    "category" : "Erotic",
+    "publishedDate" : "08/06/1610",
+    "user" : "John Doe"
+  },
+  {
+    "name" : "Tokio Blues",
+    "author" : "Murakami, Haruki",
+    "category" : "Romantic Drama",
+    "publishedDate" : "04/02/2000",
+    "user" : ""
+  },
+  {
+    "name" : "JavaScript The Definitive Guide",
+    "author" : "Flannagan, David",
+    "category" : "Programming",
+    "publishedDate" : "08/06/2008",
+    "user" : "Pako Herrera"
+  },
+  {
+    "name" : "Making Ideas Happen",
+    "author" : "Belsky, Scott",
+    "category" : "Entrepreneurship",
+    "publishedDate" : "03/03/2011",
+    "user" : ""
+  },
+  {
+    "name" : "CSS Cookbook",
+    "author" : "Schmitt, Christopher",
+    "category" : "Programming",
+    "publishedDate" : "28/02/2007",
+    "user" : ""
+  },
+  {
+    "name" : "The Shinning",
+    "author" : "King, Stephen",
+    "category" : "Horror",
+    "publishedDate" : "11/11/1975",
+    "user" : "John Snow"
+  },
+  {
+    "name" : "La Peste",
+    "author" : "Camus, Albert",
+    "category" : "Philosophy",
+    "publishedDate" : "04/05/1947",
+    "user" : ""
+  },
+  {
+    "name" : "El Extranjero",
+    "author" : "Camus, Albert",
+    "category" : "Philosophy",
+    "publishedDate" : "07/05/1953",
+    "user" : ""
+  }
+]
